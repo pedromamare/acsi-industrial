@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // E-mail configurado para recebimento
-const RECIPIENT_EMAIL = "henrique.tobler@acsiind.onmicrosoft.com";
+const RECIPIENT_EMAIL = "henri@acsiind.onmicrosoft.com";
 
 const Contact: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -69,12 +69,12 @@ ${formData.message}`;
             <h2 className="text-[#A32A26] font-bold tracking-widest uppercase text-sm mb-3">Nossos Contatos</h2>
             <h3 className="text-4xl font-extrabold text-[#2D3E50] mb-8">Fale Conosco</h3>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 gap-8">
               <div className="p-6 bg-slate-50 rounded-lg">
                 <h4 className="text-lg font-bold text-[#A32A26] mb-4 uppercase tracking-tighter">Henri Udo</h4>
                 <div className="space-y-3 text-sm">
-                  <a 
-                    href="tel:+5541988339333" 
+                  <a
+                    href="tel:+5541988339333"
                     onClick={(e) => handlePhoneClick(e, "5541988339333")}
                     className="flex items-center gap-3 text-slate-600 hover:text-[#A32A26] transition-colors"
                   >
@@ -82,22 +82,6 @@ ${formData.message}`;
                   </a>
                   <a href="mailto:henri@acsiind.onmicrosoft.com" className="flex items-center gap-3 text-slate-600 break-all hover:text-[#A32A26] transition-colors">
                     <i className="fa-solid fa-envelope"></i> henri@acsiind.onmicrosoft.com
-                  </a>
-                </div>
-              </div>
-
-              <div className="p-6 bg-slate-50 rounded-lg">
-                <h4 className="text-lg font-bold text-[#A32A26] mb-4 uppercase tracking-tighter">Henrique Tobler</h4>
-                <div className="space-y-3 text-sm">
-                  <a 
-                    href="tel:+5541984049836" 
-                    onClick={(e) => handlePhoneClick(e, "5541984049836")}
-                    className="flex items-center gap-3 text-slate-600 hover:text-[#A32A26] transition-colors"
-                  >
-                    <i className="fa-solid fa-phone"></i> (41) 98404-9836
-                  </a>
-                  <a href="mailto:henrique.tobler@acsiind.onmicrosoft.com" className="flex items-center gap-3 text-slate-600 break-all hover:text-[#A32A26] transition-colors">
-                    <i className="fa-solid fa-envelope"></i> henrique.tobler@acsiind.onmicrosoft.com
                   </a>
                 </div>
               </div>

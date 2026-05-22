@@ -89,13 +89,6 @@ export const SERVICES: DetailedService[] = [
 
 export const TEAM = [
   {
-    name: 'Henrique Kaston Tobler',
-    role: 'Engenheiro Mecânico',
-    image: 'https://i.redd.it/sjcf32lwobeg1.jpg',
-    bio: 'Sou Engenheiro Mecânico com sólida experiência no setor industrial, atuando em projetos técnicos, manutenção e gestão de obras. Trabalhei por mais de seis anos supervisionando obras de sistemas de refrigeração comercial, liderando equipes multidisciplinares nas áreas civil, mecânica e elétrica, garantindo a entrega completa e funcional das instalações. Também acumulo mais de cinco anos de experiência em instalações industriais, incluindo implantação de máquinas e equipamentos, construção de galpões, infraestrutura de utilidades e integração de células robotizadas. Minha atuação envolve a gestão de prazos, custos, qualidade e segurança, assegurando eficiência e confiabilidade em projetos no ambiente fabril',
-    experience: []
-  },
-  {
     name: 'Henri Udo Bostelmann Filho',
     role: 'Engenheiro Mecânico',
     image: 'https://i.redd.it/ie7wz5tn3ahg1.png',
