@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-// E-mail configurado para recebimento
-const RECIPIENT_EMAIL = "henri@acsiind.onmicrosoft.com";
+const API_ENDPOINT = "https://api.acsiindustrial.com/send";
 
 const Contact: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,33 +18,30 @@ const Contact: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Montagem do Assunto
-    const subjectLine = `Orçamento Site ACSI: ${formData.subject} - ${formData.name}`;
-    
-    // Montagem do Corpo do E-mail (O uso de quebras de linha reais dentro da crase ajuda na formatação)
-    const bodyContent = `Olá, gostaria de solicitar um orçamento.
+    if (sending) return;
+    setError(null);
+    setSending(true);
 
-Nome: ${formData.name}
-E-mail de Contato: ${formData.email}
-Assunto: ${formData.subject}
-
-Mensagem:
-${formData.message}`;
-
-    // Geramos a URL final codificando os componentes para evitar erros de caracteres especiais
-    const mailtoUrl = `mailto:${RECIPIENT_EMAIL}?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(bodyContent)}`;
-
-    // Redirecionamento para o gerenciador de e-mail
-    window.open(mailtoUrl);
-
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
-    
-    // Limpar formulário
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    try {
+      const res = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || 'Falha no envio.');
+      }
+      setSubmitted(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setSubmitted(false), 8000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Erro ao enviar.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const handlePhoneClick = (e: React.MouseEvent<HTMLAnchorElement>, phoneNumber: string) => {
@@ -107,10 +105,10 @@ ${formData.message}`;
           <div className="bg-white p-8 rounded-sm shadow-2xl border border-slate-100">
             <h4 className="text-2xl font-bold text-[#2D3E50] mb-6 uppercase tracking-tighter">Solicite um Orçamento</h4>
             {submitted ? (
-              <div className="bg-green-50 border border-green-200 text-green-800 p-8 rounded text-center animate-bounce">
+              <div className="bg-green-50 border border-green-200 text-green-800 p-8 rounded text-center">
                 <i className="fa-solid fa-circle-check text-4xl mb-4"></i>
-                <h5 className="text-xl font-bold">Encaminhando...</h5>
-                <p>Seu gerenciador de e-mail será aberto para confirmar o envio.</p>
+                <h5 className="text-xl font-bold">Mensagem enviada!</h5>
+                <p>Em breve nossa equipe entrará em contato.</p>
               </div>
             ) : (
               <form className="space-y-6" onSubmit={handleSubmit}>
@@ -168,8 +166,17 @@ ${formData.message}`;
                     placeholder="Descreva brevemente suas necessidades..."
                   ></textarea>
                 </div>
-                <button type="submit" className="w-full bg-[#A32A26] hover:bg-[#85211e] text-white font-black py-5 rounded-sm shadow-xl transition-all tracking-widest text-sm uppercase">
-                  ENVIAR MENSAGEM
+                {error && (
+                  <div className="bg-red-50 border border-red-200 text-red-800 p-4 rounded text-sm">
+                    <i className="fa-solid fa-triangle-exclamation mr-2"></i>{error}
+                  </div>
+                )}
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="w-full bg-[#A32A26] hover:bg-[#85211e] disabled:opacity-60 disabled:cursor-not-allowed text-white font-black py-5 rounded-sm shadow-xl transition-all tracking-widest text-sm uppercase"
+                >
+                  {sending ? 'ENVIANDO...' : 'ENVIAR MENSAGEM'}
                 </button>
               </form>
             )}
