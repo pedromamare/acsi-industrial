@@ -15,14 +15,14 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
     <section id="home" className="relative h-screen flex items-center overflow-hidden bg-white pt-20">
       {/* Decorative side shapes from presentation */}
       <div className="absolute inset-0 z-0 flex overflow-hidden">
-        <div className="w-1/3 h-full bg-white relative hidden md:block">
-          <div className="absolute top-0 right-0 w-24 h-full bg-[#A32A26] skew-x-[-15deg] translate-x-12 z-10 shadow-2xl"></div>
-          <div className="absolute top-0 right-0 w-8 h-full bg-[#5e1816] skew-x-[-15deg] translate-x-24 z-0"></div>
+        <div className="w-[58%] h-full bg-white relative hidden md:block">
+          <div className="absolute top-0 right-0 w-16 h-full bg-[#A32A26] skew-x-[-15deg] translate-x-8 z-10 shadow-2xl"></div>
+          <div className="absolute top-0 right-0 w-4 h-full bg-[#5e1816] skew-x-[-15deg] translate-x-16 z-0"></div>
         </div>
-        <div className="w-full md:w-2/3 h-full bg-slate-50 relative">
-          <img 
-            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000" 
-            alt="Fundo Industrial ACSI" 
+        <div className="w-full md:w-[42%] h-full bg-slate-50 relative">
+          <img
+            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000"
+            alt="Fundo Industrial ACSI"
             className="w-full h-full object-cover opacity-20 grayscale"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent md:hidden"></div>
@@ -57,9 +57,9 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
             >
               CONHEÇA MAIS
             </button>
-            <button 
+            <button
               onClick={onProjectsClick}
-              className="border-2 border-[#2D3E50] text-[#2D3E50] hover:bg-[#2D3E50] hover:text-white px-8 py-5 rounded-sm font-black text-lg transition-all uppercase tracking-widest"
+              className="bg-white border-2 border-[#2D3E50] text-[#2D3E50] hover:bg-[#2D3E50] hover:text-white px-8 py-5 rounded-sm font-black text-lg transition-all shadow-lg uppercase tracking-widest"
             >
               VER PORTFÓLIO
             </button>
