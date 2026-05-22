@@ -13,27 +13,20 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
 
   return (
     <section id="home" className="relative h-screen flex items-center overflow-hidden bg-white pt-20">
-      {/* Background layers — desktop */}
-      <div className="absolute inset-0 z-0 hidden md:block overflow-hidden">
-        {/* Left white area, cut diagonally */}
-        <div
-          className="absolute inset-y-0 left-0 bg-white"
-          style={{ right: '42%', clipPath: 'polygon(0 0, 100% 0, calc(100% + 8rem) 100%, 0 100%)' }}
-        ></div>
-        {/* Right image area, cut diagonally to match */}
-        <div
-          className="absolute inset-y-0 right-0 bg-slate-50 overflow-hidden"
-          style={{ left: '58%', clipPath: 'polygon(8rem 0, 100% 0, 100% 100%, 0 100%)' }}
-        >
+      {/* Background layers — desktop. All skewed -15deg with same vertical extent → edges stay aligned at every y */}
+      <div className="absolute inset-0 z-0 hidden md:block overflow-hidden bg-white">
+        {/* Gray + image area (right of dark stripe) */}
+        <div className="absolute -inset-y-32 -right-32 left-[58%] translate-x-14 bg-slate-50 skew-x-[-15deg] overflow-hidden">
           <img
             src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000"
             alt="Fundo Industrial ACSI"
-            className="w-full h-full object-cover opacity-20 grayscale"
+            className="absolute inset-0 w-full h-full object-cover opacity-20 grayscale skew-x-[15deg] scale-125"
           />
         </div>
-        {/* Diagonal red stripes on top of everything */}
-        <div className="absolute top-0 bottom-0 left-[58%] w-16 -translate-x-6 bg-[#A32A26] skew-x-[-15deg] z-20 shadow-2xl"></div>
-        <div className="absolute top-0 bottom-0 left-[58%] w-4 translate-x-12 bg-[#5e1816] skew-x-[-15deg] z-20"></div>
+        {/* Red thick stripe — z above bg */}
+        <div className="absolute -inset-y-32 left-[58%] w-16 -translate-x-8 bg-[#A32A26] skew-x-[-15deg] z-20 shadow-2xl"></div>
+        {/* Dark thin stripe — right edge touches gray bg */}
+        <div className="absolute -inset-y-32 left-[58%] w-4 translate-x-10 bg-[#5e1816] skew-x-[-15deg] z-20"></div>
       </div>
 
       {/* Mobile background */}
