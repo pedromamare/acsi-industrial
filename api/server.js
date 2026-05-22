@@ -27,9 +27,11 @@ app.use(cors({
   methods: ['POST', 'GET'],
 }));
 
-app.get('/health', (_req, res) => res.json({ ok: true }));
+const handleHealth = (_req, res) => res.json({ ok: true });
+app.get('/health', handleHealth);
+app.get('/api/health', handleHealth);
 
-app.post('/send', async (req, res) => {
+const handleSend = async (req, res) => {
   const { name, email, subject, message } = req.body || {};
 
   if (!name || !email || !subject || !message) {
@@ -83,7 +85,9 @@ app.post('/send', async (req, res) => {
     console.error('Send exception', err);
     return res.status(500).json({ ok: false, error: 'Erro interno.' });
   }
-});
+};
+app.post('/send', handleSend);
+app.post('/api/send', handleSend);
 
 function escapeHtml(s) {
   return String(s)

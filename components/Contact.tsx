@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const API_ENDPOINT = "https://api.acsiindustrial.com/send";
+const API_ENDPOINT = "/api/send";
 
 const Contact: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
